@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <decisions>
+        <description>Did we find a Family__c record?</description>
+        <name>IF020</name>
+        <label>IF020 Family exist?</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <defaultConnector>
+            <targetReference>Insert030</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Family must be created</defaultConnectorLabel>
+        <rules>
+            <name>IF010_FamilyFound</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get010</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update040</targetReference>
+            </connector>
+            <label>Family found</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>EX01 - Link family {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>EX01 - Link family</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create a new Family__c record with that last name. Populate the
+            Family__c&apos;s Id field on the record that we did not find.</description>
+        <name>Insert030</name>
+        <label>Insert030 Create family record</label>
+        <locationX>264</locationX>
+        <locationY>575</locationY>
+        <assignRecordIdToReference>Get010.Id</assignRecordIdToReference>
+        <connector>
+            <targetReference>Update040</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>LastName__c</field>
+            <value>
+                <elementReference>$Record.LastName</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Family__c</object>
+    </recordCreates>
+    <recordLookups>
+        <description>Find a Family__c record based on the Contact&apos;s last name</description>
+        <name>Get010</name>
+        <label>Get010 Find family</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>IF020</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LastName__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.LastName</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Family__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update the Family__c field on the Contact record based on the found record or
+            the newly creted</description>
+        <name>Update040</name>
+        <label>Update040 Update contact with family Id</label>
+        <locationX>176</locationX>
+        <locationY>791</locationY>
+        <inputAssignments>
+            <field>Family__c</field>
+            <value>
+                <elementReference>Get010.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get010</targetReference>
+        </connector>
+        <filterFormula>{!$Record.LastName} != null &amp;&amp; ({!$Record.Family__c} == null ||
+            {!$Record.LastName} != {!$Record.Family__r.LastName__c})</filterFormula>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>
