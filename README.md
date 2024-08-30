@@ -4,7 +4,7 @@ This is the code repository for the Salesforce Dreamforce '24 Hands-On Training 
 
 * You can share this repository with others by using the shortened url http://tinyurl.com/df24apexflows.
 
-* PDF files of the [exercise guide](files/DF24/DF24%20H.O.T.%20Flow%20+%20Apex%20+%20LWC%20Exercise%20Guide.pdf) and slides is included in the outer *files* folder. 
+* PDF files of the [exercise guide](files/DF24/DF24%20H.O.T.%20Flow%20+%20Apex%20+%20LWC%20Exercise%20Guide.pdf) and [slides](files/DF24/DF24%20H.O.T.%20Flow%20%2B%20Apex%20%2B%20LWC%20Slides.pdf) is included in the outer *files* folder. 
 ## Prepare your computer
 * Register with the online session site at https://sfdc.co/devFlow.
 
