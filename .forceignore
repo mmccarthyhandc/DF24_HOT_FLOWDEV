@@ -24,3 +24,6 @@ Admin.profile
 
 # This causes issues depploying, so don't use it.
 AppSwitcher.appMenu-meta.xml
+**/tsconfig.json
+
+**/*.ts
