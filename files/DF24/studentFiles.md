@@ -1,1 +1,1 @@
-[Exercise Notes](../../../)
+[Exercise Notes](../../README.md)
