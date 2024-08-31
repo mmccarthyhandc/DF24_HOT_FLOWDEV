@@ -12,14 +12,14 @@ This is the code repository for the Salesforce Dreamforce '24 Hands-On Training 
 **Note:** This special trial Salesforce org has been created to support the exercises in the session. This Salesforce org already has Code Builder installed. 
 
 
-## Exercise 2 Student Notes:
+## Exercise 1 Student Notes:
 * In the Terminal, execute the command: 
 ```sf retrieve metadata --manifest manifest/package.xml```
 
 * In the Terminal, execute the command: 
 ```sf retrieve metadata --metadata PermissionSet:HOW``` 
 
-Note: If you have trouble, from the Command Palette you can execute the command: 
+**Note**: If you have trouble, from the Command Palette you can execute the command: 
 ```>git clone http://tinyurl.com/df24apexflows```
 to create a new project. 
 
